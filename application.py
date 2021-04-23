@@ -5,7 +5,6 @@
 
 import os
 import random
-import request
 from threading import Thread
 from flask import Flask, render_template, session, redirect, url_for, request, abort
 from flask_session import Session
