@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}R8-Books{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href='{{url_for("static", filename="css/ratebook.css")}}' />
+{% endblock %}
+
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Sign Out   </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% block page_content %}
+<!-- Book Details -->
+<div style="width: 100%; overflow: hidden;">
+    <div style="width: 600px; float: left;"> <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <p>Isbn: {{book['isbn']}}</p>
+          <p>Title: {{book['title']}}</p>
+          <p>Author: {{book['author']}}</p>
+        </div>
+      </div> </div>
+    <div style="margin-left: 620px;"> <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Your Review
+          <span class="badge badge-primary badge-pill">{{user_review['rating']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Book Review Count 
+          <span class="badge badge-primary badge-pill">{{book['review_count']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Book Average Score
+          <span class="badge badge-primary badge-pill">{{book['average_score']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ratings on Google Books
+            <span class="badge badge-primary badge-pill">{{book['average_score']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ratings Count on Google Books
+            <span class="badge badge-primary badge-pill">{{book['average_score']}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Description on Google Books
+          <p><i class="bi bi-info-circle"></i>Book Description</p>
+        </li>
+    </ul> </div>
+</div>
+<!-- End of Book Details -->
+{% if not user_review %}
+    <!-- Review Form -->
+    <form action="{{url_for('ratebook', isbn=book['isbn'])}}" method="post">
+        <div class="form-group">
+        <label for="review_content">Write Your Review</label>
+        <textarea style="width: 600px;" class="form-control" name="review_content" placeholder="Enter email"> </textarea>
+        </div>
+        <div class="form-group">
+            <div class="rate">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="text">1 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="text">2 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="text">4 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="text">5 star</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>     <br><br>
+    <!-- End of Review Form -->  
+{% else %}
+<!-- Book Reviews -->
+<div class="page-header">
+    <h2>User Reviews</h2>
+</div>
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action active"> <!-- Make the user's reviews active -->
+    <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ user_review['email'] }}</h5>
+    </div>
+    <p class="mb-1"> {{ user_review['review_content'] }} </p> <!-- review content goes here -->
+    <p class="mb-1"> Rating: {{ user_review['rating'] }} </p> <!-- get rating number and draw equivalent stars-->
+    <small> {{ user_review['review_date'] }} </small> <!-- calculate current_date - review.data -->
+    </a>
+</div>
+<!-- End of Book Reviews -->
+{% endif %}
+{% for review in reviews %}
+ {% if user_review['email'] != review['email'] %}
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action"> <!-- Make the user's reviews active -->
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ review['email'] }}</h5>
+        </div>
+        <p class="mb-1"> {{ review['review_content'] }} </p> <!-- review content goes here -->
+        <p class="mb-1"> Rating: {{ review['rating'] }} </p> <!-- get rating number and draw equivalent stars-->
+        <small> {{ review['review_date'] }} </small> <!-- calculate current_date - review.data -->
+        </a>
+    </div>
+ {% endif %}
+{% endfor %}
+
+{% endblock %}

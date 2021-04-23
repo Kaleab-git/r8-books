@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}r8-Books{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h4>Email: {{ email }} </h4>
+    <p>Incorrect Email?  Go to <a href="{{url_for('register')}}">Registeration</a> </p>
+</div>  
+
+{%if wrong_attempt %}
+<h3> Incorrect Code </h3>
+{% endif %}
+
+<form class="form form-horizontal" method="post" role="form">
+    {{ wtf.quick_form(form) }}
+</form>
+{% endblock %}
+
+<div>
+<h3>Not your account?</h3>
+<a href="">resend verification code</a>
+</div>

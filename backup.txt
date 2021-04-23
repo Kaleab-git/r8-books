@@ -1,0 +1,38 @@
+app.config['SECRET_KEY'] = 'hard to guess string'
+app.register_error_handler(404, page_not_found)
+migrate = Migrate(app, db)
+
+moment = Moment(app)
+db = SQLAlchemy(app)
+
+
+
+class Review(db.Model):
+    __tablename__ = 'reviews'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), db.ForeignKey('users.email'), primary_key=True)
+    isbn = db.Column(db.String(64), db.ForeignKey('books.isbn'), primary_key=True)
+    rating = db.Column(db.Integer, index=True)
+    review_content = db.Column(db.String(64), index=True)
+    user = db.relationship('User')
+class User(db.Model):
+    __tablename__ = 'users'
+    email = db.Column(db.String(64), primary_key=True, unique=True, index=True)
+    f_name = db.Column(db.String(64), index=True, nullable=True)
+    l_name = db.Column(db.String(64), index=True, nullable=True)
+    password = db.Column(db.String(64), index=True)
+    reviews = db.relationship('Review', backref='User')#given an instance of a user, returns list of reviews associated with it. So all the books this user reviewed
+class Book(db.Model):
+    __tablename__ = 'books'
+    isbn = db.Column(db.String(64), primary_key=True, unique=True, index=True)
+    name = db.Column(db.String(64), index=True)
+    title = db.Column(db.String(64), index=True)
+    year = db.Column(db.Integer, index=True)
+    author = db.Column(db.String(64), index=True)
+    review_count = db.Column(db.Integer, index=True) 
+    average_score = db.Column(db.String(64), index=True)
+    # reviews = db.relationship('Review', backref='Book')
+
+                # db.session.add(user)
+                # db.session.commit()
+                # user = User(email=request.args.get('email'), f_name=request.args.get('f_name'), l_name=request.args.get('l_name'), password=request.args.get('password'))
