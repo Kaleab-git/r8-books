@@ -46,7 +46,7 @@ mail = Mail(app)
 
 
 # Set up database
-engine = create_engine(os.getenv("postgresql://dvtrtgheuraofs:a0f1eb545d56c5d3b1b2faac7497be47472dc6eb4469a0242dd57c7abfd08879@ec2-107-22-245-82.compute-1.amazonaws.com:5432/dfubjh8odsr8th"))
+engine = create_engine("postgresql://dvtrtgheuraofs:a0f1eb545d56c5d3b1b2faac7497be47472dc6eb4469a0242dd57c7abfd08879@ec2-107-22-245-82.compute-1.amazonaws.com:5432/dfubjh8odsr8th")
 db = scoped_session(sessionmaker(bind=engine))
 
 # Check for environment variable
