@@ -1,4 +1,6 @@
 Flask
+Jinja2
+Werkzeug
 Flask-Session
 psycopg2-binary
 SQLAlchemy
