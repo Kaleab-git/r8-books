@@ -23,8 +23,8 @@ app = Flask(__name__)
 
 
 # Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+# if not os.getenv("DATABASE_URL"):
+#     raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -46,7 +46,7 @@ mail = Mail(app)
 
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine(os.getenv("postgresql://dvtrtgheuraofs:a0f1eb545d56c5d3b1b2faac7497be47472dc6eb4469a0242dd57c7abfd08879@ec2-107-22-245-82.compute-1.amazonaws.com:5432/dfubjh8odsr8th"))
 db = scoped_session(sessionmaker(bind=engine))
 
 # Check for environment variable
