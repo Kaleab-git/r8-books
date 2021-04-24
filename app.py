@@ -31,7 +31,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 app.config['SECRET_KEY'] = 'hard to guess string'
-app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://dvtrtgheuraofs:a0f1eb545d56c5d3b1b2faac7497be47472dc6eb4469a0242dd57c7abfd08879@ec2-107-22-245-82.compute-1.amazonaws.com:5432/dfubjh8odsr8th"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
