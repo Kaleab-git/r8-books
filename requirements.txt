@@ -6,3 +6,4 @@ flask_bootstrap
 flask-wtf
 flask_sqlalchemy
 flask_mail
+gunicorn

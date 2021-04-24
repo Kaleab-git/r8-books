@@ -4,3 +4,4 @@ export DATABASE_URL=""postgresql://dvtrtgheuraofs:a0f1eb545d56c5d3b1b2faac7497be
 export MAIL_USERNAME="kaleabgirmat@gmail.com"
 export MAIL_PASSWORD="God is love"
 export FLASKY_ADMIN='kaleabgirmat@gmail.com'
+flask run
