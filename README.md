@@ -1,3 +1,15 @@
+Website is deployed @ https://r8-books.herokuapp.com/
+Email Verfication is currently not working for security reasons.
+You can use username: se.kaleab.girma  & password: 123 to login
+
+
+
+
+
+
+
+
+
 # Project 1: Books
 This project is adopted form Harvard's most popular class **CS50** Programming with Python and JavaScript [[1]](#1).
 
